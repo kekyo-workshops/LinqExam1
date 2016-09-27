@@ -152,7 +152,9 @@ namespace LinqExam1
             Person[] persons, string firstName, int floorAge)
         {
             return persons.
-                // ...
+                Where(person =>
+                    (person.FirstName == firstName) &&
+                    (person.Age >= floorAge)).
                 ToArray();
         }
 
