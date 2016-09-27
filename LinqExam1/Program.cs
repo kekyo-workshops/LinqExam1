@@ -125,6 +125,7 @@ namespace LinqExam1
         }
         #endregion
 
+        #region Person
         public sealed class Person
         {
             public string FirstName;
@@ -140,6 +141,7 @@ namespace LinqExam1
                     $"Address={string.Join(",", this.AddressElements)}";
             }
         }
+        #endregion
 
         #region ExtractByFirstName
         public static Person[] ExtractByFirstName(Person[] persons, string firstName)
@@ -162,6 +164,7 @@ namespace LinqExam1
         }
         #endregion
 
+        #region ExtractByFirstNameAndAddress
         private static Person[] ExtractByFirstNameAndAddress(
             Person[] persons, string firstName, string address)
         {
@@ -172,6 +175,18 @@ namespace LinqExam1
                 ToArray();
         }
 
+        private static Person[] ExtractByFirstNameAndAddress2(
+            Person[] persons, string firstName, string address)
+        {
+            return persons.
+                Where(person =>
+                    (person.FirstName == firstName) &&
+                    (person.AddressElements.Any(element => element.Contains(address) == true))).
+                ToArray();
+        }
+        #endregion
+
+        #region TestPerson
         private static void TestPerson()
         {
             var persons = new[]
@@ -187,9 +202,11 @@ namespace LinqExam1
 
             //var results = ExtractByFirstName(persons, "Ichiro");
             //var results = ExtractByFirstNameAndAge(persons, "Ichiro", 25);
-            var results = ExtractByFirstNameAndAddress(persons, "Ichiro", "Matsuyama");
+            //var results = ExtractByFirstNameAndAddress(persons, "Ichiro", "Matsuyama");
+            var results = ExtractByFirstNameAndAddress2(persons, "Ichiro", "Matsu");
             Console.WriteLine(string.Join("\r\n", (object[])results));
         }
+        #endregion
 
         static void Main(string[] args)
         {
