@@ -166,7 +166,9 @@ namespace LinqExam1
             Person[] persons, string firstName, string address)
         {
             return persons.
-                // ...
+                Where(person =>
+                    (person.FirstName == firstName) &&
+                    (person.AddressElements.Contains(address) == true)).
                 ToArray();
         }
 
