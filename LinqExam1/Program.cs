@@ -69,6 +69,7 @@ namespace LinqExam1
         }
         #endregion
 
+        #region CreateRandomEvenDistinctData
         private static int[] CreateRandomEvenDistinctData(int count)
         {
             var r = new Random();
@@ -98,13 +99,27 @@ namespace LinqExam1
             return data;
         }
 
+        private static int[] CreateRandomEvenDistinctDataForLINQ(int count)
+        {
+            var r = new Random();
+            return
+                Infinite(0).
+                Select(index => r.Next()).
+                Where(value => (value % 2) == 0).
+                Distinct().
+                Take(count).
+                ToArray();
+        }
+        #endregion
+
         private static void TestRandomData()
         {
             //var data = CreateRandomData(100);
             //var data = CreateRandomDataForLINQ(100);
             //var data = CreateRandomEvenData(100);
             //var data = CreateRandomEvenDataForLINQ(100);
-            var data = CreateRandomEvenDistinctData(100);
+            //var data = CreateRandomEvenDistinctData(100);
+            var data = CreateRandomEvenDistinctDataForLINQ(100);
             Console.WriteLine(string.Join(",", data));
         }
 
