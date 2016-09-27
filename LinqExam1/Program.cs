@@ -139,10 +139,20 @@ namespace LinqExam1
             }
         }
 
+        #region ExtractByFirstName
         public static Person[] ExtractByFirstName(Person[] persons, string firstName)
         {
             return persons.
                 Where(person => person.FirstName == firstName).
+                ToArray();
+        }
+        #endregion
+
+        private static Person[] ExtractByFirstNameAndAge(
+            Person[] persons, string firstName, int floorAge)
+        {
+            return persons.
+                // ...
                 ToArray();
         }
 
@@ -159,7 +169,8 @@ namespace LinqExam1
                 new Person {FirstName = "Hideto", LastName = "Ehime", Age = 24}
             };
 
-            var results = ExtractByFirstName(persons, "Ichiro");
+            //var results = ExtractByFirstName(persons, "Ichiro");
+            var results = ExtractByFirstNameAndAge(persons, "Ichiro", 25);
             Console.WriteLine(string.Join("\r\n", (object[])results));
         }
 
