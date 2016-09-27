@@ -142,7 +142,7 @@ namespace LinqExam1
         public static Person[] ExtractByFirstName(Person[] persons, string firstName)
         {
             return persons.
-                // ...
+                Where(person => person.FirstName == firstName).
                 ToArray();
         }
 
