@@ -39,10 +39,16 @@ namespace LinqExam1
         }
         #endregion
 
+        private static int[] CreateRandomEvenData(int count)
+        {
+            return null;  // ...
+        }
+
         private static void TestRandomData()
         {
             //var data = CreateRandomData(100);
-            var data = CreateRandomDataForLINQ(100);
+            //var data = CreateRandomDataForLINQ(100);
+            var data = CreateRandomEvenData(100);
             Console.WriteLine(string.Join(",", data));
         }
 
