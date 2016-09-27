@@ -112,6 +112,7 @@ namespace LinqExam1
         }
         #endregion
 
+        #region TestRandomData
         private static void TestRandomData()
         {
             //var data = CreateRandomData(100);
@@ -122,10 +123,50 @@ namespace LinqExam1
             var data = CreateRandomEvenDistinctDataForLINQ(100);
             Console.WriteLine(string.Join(",", data));
         }
+        #endregion
+
+        public sealed class Person
+        {
+            public string FirstName;
+            public string LastName;
+            public int Age;
+
+            public override string ToString()
+            {
+                return
+                    $"Name={this.FirstName} {this.LastName}, " +
+                    $"Age={this.Age}";
+            }
+        }
+
+        public static Person[] ExtractByFirstName(Person[] persons, string firstName)
+        {
+            return persons.
+                // ...
+                ToArray();
+        }
+
+        private static void TestPerson()
+        {
+            var persons = new[]
+            {
+                new Person {FirstName = "Ichiro", LastName = "Yamada", Age = 22},
+                new Person {FirstName = "Hanako", LastName = "Ehime", Age = 21},
+                new Person {FirstName = "Ichiro", LastName = "Jouetsu", Age = 36},
+                new Person {FirstName = "Shouta", LastName = "Tokuno", Age = 27},
+                new Person {FirstName = "Ryouichi", LastName = "Nishiki", Age = 22},
+                new Person {FirstName = "Kyoko", LastName = "Okashima", Age = 33},
+                new Person {FirstName = "Hideto", LastName = "Ehime", Age = 24}
+            };
+
+            var results = ExtractByFirstName(persons, "Ichiro");
+            Console.WriteLine(string.Join("\r\n", (object[])results));
+        }
 
         static void Main(string[] args)
         {
-            TestRandomData();
+            //TestRandomData();
+            TestPerson();
         }
     }
 }
