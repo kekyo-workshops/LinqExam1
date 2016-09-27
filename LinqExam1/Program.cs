@@ -69,12 +69,42 @@ namespace LinqExam1
         }
         #endregion
 
+        private static int[] CreateRandomEvenDistinctData(int count)
+        {
+            var r = new Random();
+            var data = new int[count];
+            var index = 0;
+            while (index < count)
+            {
+                var value = r.Next();
+                if ((value % 2) == 0)
+                {
+                    var found = false;
+                    for (var innerIndex = 0; innerIndex < index; innerIndex++)
+                    {
+                        if (value == data[innerIndex])
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found == false)
+                    {
+                        data[index] = value;
+                        index++;
+                    }
+                }
+            }
+            return data;
+        }
+
         private static void TestRandomData()
         {
             //var data = CreateRandomData(100);
             //var data = CreateRandomDataForLINQ(100);
             //var data = CreateRandomEvenData(100);
-            var data = CreateRandomEvenDataForLINQ(100);
+            //var data = CreateRandomEvenDataForLINQ(100);
+            var data = CreateRandomEvenDistinctData(100);
             Console.WriteLine(string.Join(",", data));
         }
 
