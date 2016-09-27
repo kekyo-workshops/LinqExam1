@@ -130,12 +130,14 @@ namespace LinqExam1
             public string FirstName;
             public string LastName;
             public int Age;
+            public string[] AddressElements;
 
             public override string ToString()
             {
                 return
                     $"Name={this.FirstName} {this.LastName}, " +
-                    $"Age={this.Age}";
+                    $"Age={this.Age}, " +
+                    $"Address={string.Join(",", this.AddressElements)}";
             }
         }
 
@@ -148,6 +150,7 @@ namespace LinqExam1
         }
         #endregion
 
+        #region ExtractByFirstNameAndAge
         private static Person[] ExtractByFirstNameAndAge(
             Person[] persons, string firstName, int floorAge)
         {
@@ -157,22 +160,32 @@ namespace LinqExam1
                     (person.Age >= floorAge)).
                 ToArray();
         }
+        #endregion
+
+        private static Person[] ExtractByFirstNameAndAddress(
+            Person[] persons, string firstName, string address)
+        {
+            return persons.
+                // ...
+                ToArray();
+        }
 
         private static void TestPerson()
         {
             var persons = new[]
             {
-                new Person {FirstName = "Ichiro", LastName = "Yamada", Age = 22},
-                new Person {FirstName = "Hanako", LastName = "Ehime", Age = 21},
-                new Person {FirstName = "Ichiro", LastName = "Jouetsu", Age = 36},
-                new Person {FirstName = "Shouta", LastName = "Tokuno", Age = 27},
-                new Person {FirstName = "Ryouichi", LastName = "Nishiki", Age = 22},
-                new Person {FirstName = "Kyoko", LastName = "Okashima", Age = 33},
-                new Person {FirstName = "Hideto", LastName = "Ehime", Age = 24}
+                new Person { FirstName = "Ichiro", LastName = "Yamada", Age = 22, AddressElements = new[] { "Aichi", "Nagoya", "Matsuji" } },
+                new Person { FirstName = "Hanako", LastName = "Ehime", Age = 21, AddressElements = new[] { "Ehime", "Saijo" } },
+                new Person { FirstName = "Ichiro", LastName = "Jouetsu", Age = 36, AddressElements = new[] { "Ehime", "Matsuyama" } },
+                new Person { FirstName = "Shouta", LastName = "Tokuno", Age = 27, AddressElements = new[] { "Tokyo", "Akasaka", "Hiroji" } },
+                new Person { FirstName = "Ryouichi", LastName = "Nishiki", Age = 22, AddressElements = new[] { "Nagano", "Hakuba" } },
+                new Person { FirstName = "Kyoko", LastName = "Okashima", Age = 33, AddressElements = new[] { "Hokkaido", "Asahikawa", "Asahiyama" } },
+                new Person { FirstName = "Hideto", LastName = "Ehime", Age = 24, AddressElements = new[] { "Tokyo", "Meguro", "Mihiro" } }
             };
 
             //var results = ExtractByFirstName(persons, "Ichiro");
-            var results = ExtractByFirstNameAndAge(persons, "Ichiro", 25);
+            //var results = ExtractByFirstNameAndAge(persons, "Ichiro", 25);
+            var results = ExtractByFirstNameAndAddress(persons, "Ichiro", "Matsuyama");
             Console.WriteLine(string.Join("\r\n", (object[])results));
         }
 
